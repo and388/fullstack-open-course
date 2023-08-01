@@ -31,7 +31,7 @@ const StatisticLine = (props) => {
     <>
     <tr>
       <td>{props.text}</td>
-    <td>{props.value}{props.text==="Positive"?"%":""}</td>
+    <td>{props.value}{props.text==="Positive"?"%":""}</td> 
       </tr></>
   )
 }
