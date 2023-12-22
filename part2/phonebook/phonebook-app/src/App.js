@@ -73,7 +73,7 @@ const App = () => {
 
   const deletePerson = (id) => {
     personService.deletePerson(id).then(response => setPerson(person.filter(person => person.id !== id))).catch(e => {
-      setErrorMessage({message: 'a new person was added', color:'green'})
+      setErrorMessage({message: 'a error ocurred', color:'red'})
     })
 
   }
