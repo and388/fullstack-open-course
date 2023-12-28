@@ -48,8 +48,10 @@ app.get("/api/contacts", (request, response ) => {
 app.post("/api/contacts", (request, response) => {
     if(!request.body) {return response.status(400).end()}
     const contact = new Contact ({...request.body})
-     contact.save().then( contactSaved => response.json(contactSaved)).catch(error => response.status(500).end())    
-    response.json(note)
+     contact.save()
+     .then( contactSaved => { console.log(contactSaved), response.json(contactSaved)})
+     .catch(error => response.status(500).end())    
+    
    
 })
 
