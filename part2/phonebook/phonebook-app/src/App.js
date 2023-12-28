@@ -37,7 +37,8 @@ const handleSubmitForm = (event) => {
   return(
   <form onSubmit={handleSubmitForm}>
       <div className = 'divname'>
-         name:<input className='namecamp' value={newName} onChange={handleNameChange}/>
+        <div> <label for="nameCamp">name:</label></div>
+         <div><input className='namecamp' id="nameCamp" value={newName} onChange={handleNameChange}/></div>
        </div>
       <div className = 'divphone' >phone:<input className = 'phonecamp'type="tel" value={newPhone} onChange={handlePhoneChange}/></div>
       <div>
