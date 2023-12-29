@@ -62,7 +62,7 @@ app.get("/api/contacts/:id", (request, response) => {
 
 app.delete('/api/contacts/:id', (request, response) => {
   id = request.params.id
-   Contact.deleteOne({_id:id}).then(deleted => response.send("<deleted>")).catch(response.status('500').end)
+   Contact.deleteOne({_id:id}).then(deleted => response.status(200).end()).catch(response.status(500).end)
 })
 
 app.put("/api/contacts/:id", (request, response) => {
