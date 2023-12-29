@@ -56,19 +56,13 @@ app.post("/api/contacts", (request, response) => {
 })
 
 app.get("/api/contacts/:id", (request, response) => {
-    const id = Number(request.params.id);
-     Contact.findById(id).then(contact => response.json(contact)).catch( error => {response.status(404).send({error:error})})
+    const id = request.params.id;
+     Contact.findById({_id:id}).then(contact => response.json(contact)).catch( error => {response.status(404).send({error:error})})
 })
 
 app.delete('/api/contacts/:id', (request, response) => {
   id = request.params.id
-  if(!id) {return response.status("200").end()}
-  contactsNow = contacts.filter(n => n.id !== id)
-  if(contacts.length !== contactsNow.length) {
-    contacts = contactsNow
-    return response.status("200").end()
-  }
-  response.status("200").end()
+   Contact.deleteOne({_id:id}).then(deleted => response.send("<deleted>")).catch(response.status('500').end)
 })
 
 app.put("/api/contacts/:id", (request, response) => {
