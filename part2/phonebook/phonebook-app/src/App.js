@@ -37,12 +37,15 @@ const handleSubmitForm = (event) => {
   return(
   <form onSubmit={handleSubmitForm}>
       <div className = 'divname'>
-        <div> <label for="nameCamp">name:</label></div>
-         <div><input className='namecamp' id="nameCamp" value={newName} onChange={handleNameChange}/></div>
+        <div> <label htmlFor="nameCamp">name:</label>
+         <input className='namecamp' id="nameCamp" value={newName} onChange={handleNameChange}/></div>
        </div>
-      <div className = 'divphone' >phone:<input className = 'phonecamp'type="tel" value={newPhone} onChange={handlePhoneChange}/></div>
-      <div>
-        <button  className='button' type="submit" >add</button>
+      <div className = 'divphone' >
+        <div> <label htmlFor='phonecamp'>phone:</label>
+         <input className = 'phonecamp' id='phonecamp' type="tel" value={newPhone} onChange={handlePhoneChange}/></div>  
+        </div>
+      <div id="button">
+        <button  className='button' type="submit" >Adicionar</button>
         </div>
     </form>
        )
@@ -54,7 +57,7 @@ const Phonebooklist = ({person,deletePerson}) => {
   return  <div>
     <ul className='list'>{person.map((person) => 
         <li  className ='listItem' key={person.id}>
-          Name:{person.name} phone:{person.number}
+          <p>Name:{person.name} phone:{person.number}</p>
           <button onClick={()=>deletePerson(person.id)}>Delete</button>
           </li>)}
           </ul>
@@ -82,7 +85,7 @@ const App = () => {
     <div className='container'>
       <h2 className='title'>Phonebook</h2>
       <Notification message = {errorMessage.status}  setErrorMessage={setErrorMessage} color={errorMessage.color}/>
-      <Phonesearch person={person}  />
+           <Phonesearch person={person}  />
         <br/>
         <br/>
       <ContactCreator person={person} setPerson={setPerson} setErrorMessage= {setErrorMessage}/>
@@ -91,14 +94,15 @@ const App = () => {
   )
 }
 
-const Phonesearch = (props) => {
-  var person = props.person; console.log(props.person[1])
+const Phonesearch = ({person}) => {
+  console.log(person)
   const [searchCamp, setSearchCamp] = useState('')
   const [searchResultstate,setSearchResultstate] = useState('')
 
   const handleSearchChange = (event) => {
+    const personSearch = person
     setSearchCamp(event.target.value)
-    person.forEach(element => {
+    personSearch.forEach(element => {
       if(event.target.value!== ''){if(element.name.startsWith(event.target.value)) { setSearchResultstate(`name:${element.name} phone:${element.number}`)
     }else{setSearchResultstate('')}
     }}
@@ -106,7 +110,7 @@ const Phonesearch = (props) => {
   }
 
      return <>
-              <div>
+              <div id="searchDiv">
                    search:<input className='searchcamp' value={searchCamp} onChange={handleSearchChange} />
                 </div>
               <div>

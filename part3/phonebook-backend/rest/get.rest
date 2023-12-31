@@ -1,12 +1,15 @@
-get http://localhost:8080/
+get http://localhost:3001/api/contacts
 
 ####
 
-get http://localhost:8080/api/contacts/12
+get http://localhost:3001/api/contacts/658db46a4aa5813d3f0aafbf
 
 ####
 
-post http://localhost:8080/api/contacts
+post http://localhost:3001/api/contacts
 content-type:application/json
 
-{"name":"gino&geno","number":"3391092384","id":"123"}
+{"name":"gino&geno","number":"3391092384"}
+
+####
+delete http://localhost:3001/api/contacts/658e093706c36e81ec427dfb
