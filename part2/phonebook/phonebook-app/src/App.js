@@ -15,14 +15,14 @@ const handleSubmitForm = (event) => {
         found = true;
         personService.updatePerson(person[i].id, newObject)
           .then( response => {setPerson(person.map(element => element.id === person[i].id? response.data: element)); })
-            .catch(e =>setErrorMessage({status:'erro', color:'red'}) )
+            .catch(e =>setErrorMessage({status:e.response.data.error, color:'red'}) )
       }
       }
         
     }
     if(!found) {
       personService.createPerson(newObject).then(response => {setPerson(person.concat(response.data)); setErrorMessage({status:`Added ${response.data.name}`, color:'green'})})
-      .catch( error => setErrorMessage({status:' something goes wrong.. person not save', color:'red'} ))
+      .catch( error => setErrorMessage({status:error.response.data.error, color:'red'} ))
      }
    }
 
@@ -77,7 +77,7 @@ const App = () => {
 
   const deletePerson = (id) => {
     personService.deletePerson(id).then(response => setPerson(person.filter(person => person.id !== id))).catch(e => {
-      setErrorMessage({message: 'a error ocurred', color:'red'})
+      setErrorMessage({message: e.response.data.error, color:'red'})
     })
 
   }
