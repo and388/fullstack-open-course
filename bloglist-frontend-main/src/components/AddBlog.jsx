@@ -1,7 +1,7 @@
 import blogsService from '../services/blogs'
 import {useState} from 'react'
 
-const AddBlog = ({user,setBlogs,blogs}) => { 
+const AddBlog = ({user,setUser,setBlogs,blogs,notification}) => { 
     const [titleCamp,setTitleCamp] = useState('')
     const [authorCamp, setAuthorCamp] = useState('')
     const [urlCamp, setUrlCamp] = useState('')
@@ -13,7 +13,13 @@ const AddBlog = ({user,setBlogs,blogs}) => {
     console.log(blog)
       var saved = await blogsService.createBlog(user,blog)
       console.log(saved,'this is the saved blog')
-      setBlogs(blogs.concat(saved))
+      if( saved !== null) {
+        setBlogs(blogs.concat(saved))
+         notification({notification:'The Blog was sucessfully saved!!',color:'rgb(0,255,0)'})
+        }else{
+            notification({notification:'the blog was not saved, please log again!!',color:'rbg(255,20,20,0.5)'})
+            setTimeout(() => {window.localStorage.removeItem('user'),setUser(null)}, 6000)
+        }
     
 
  }
