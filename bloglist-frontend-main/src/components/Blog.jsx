@@ -1,7 +1,7 @@
 import blogService from '../services/blogs'
 import {useState} from 'react'
 
-const Blog = ({ blog,deleteBlog}) => {
+const Blog = ({ blog,deleteBlog, updateBlogState}) => {
 const [visibleDetails,setVisibleDetails] = useState(null)
  const handleDeleteButton = async(id) => {
   var response = await blogService.deleteBlog(id)
@@ -12,8 +12,9 @@ const [visibleDetails,setVisibleDetails] = useState(null)
 
   const detailsButton = () => {setVisibleDetails(!visibleDetails)}
 
-  const handleLike = () => {
-    blogService.updateBlog(blog)
+  const handleLike = async () =>  {
+    var newBlog = await blogService.updateBlog(blog)
+    updateBlogState(newBlog)
   }
       
   return (

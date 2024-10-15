@@ -43,7 +43,7 @@ const updateBlog = async (blog) => {
      var newBlog = {...blog,likes:blog.likes+1}
 console.log(blog,newBlog)
   var response = await axios.put(url,newBlog)
-  console.log(response.data)
+  return response.data
 
 }
 

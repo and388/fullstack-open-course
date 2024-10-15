@@ -34,6 +34,12 @@ const App = () => {
         setBlogs(newBlogs)
   }
 
+  const updateBlogState = (newBlog) => {
+    var newBlogState = blogs.map( blog => blog.id === newBlog.id? newBlog:blog)
+    console.log('this is the new blog from blog component ',newBlog)
+   // console.log(blogs,newBlogState)
+  }
+
   if(notification) {
     setTimeout(() => { setNotification(null)}, 5000)
   }
@@ -46,7 +52,7 @@ const App = () => {
     </Togglable> 
  <div>
     <button onClick={()=>{setUser(null), window.localStorage.removeItem('user')}}>logout</button>
-    <Blogs blogs ={blogs} token={user} deleteBlog={deleteBlog} />
+    <Blogs blogs ={blogs} token={user} deleteBlog={deleteBlog} updateBlogState ={updateBlogState} />
     <Togglable  buttonLabel='new Blog' ref={blogFormRef}>
     <AddBlog  user={user} setUser={setUser} setBlogs={setBlogs} blogs={blogs} notification = {setNotification}/>
     </Togglable>
